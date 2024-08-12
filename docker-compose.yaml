@@ -1,0 +1,14 @@
+version: '3'
+services: 
+  netcat_server:
+    image: 127.0.0.1:8082/netcat
+    ports:
+      - 31337:31337
+    stdin_open: true
+    tty: true
+
+  reverse_proxy:
+    image: 127.0.0.1:8082/reverse_proxy
+    depends_on:
+      - netcat_server
+    network_mode: "host" 
